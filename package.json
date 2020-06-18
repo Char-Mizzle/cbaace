@@ -1,0 +1,46 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "Server Side for LayerCake",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo testing",
+    "start": "node index",
+    "build": "cd client/ && npm install && npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/charliemonnone/CSE416-LayerCake.git"
+  },
+  "keywords": [
+    "graphql",
+    "auth",
+    "authentication",
+    "passport"
+  ],
+  "author": "HanBin Baik",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": ""
+  },
+  "homepage": "",
+  "dependencies": {
+    "apollo-server": "^2.12.0",
+    "apollo-server-express": "^2.12.0",
+    "create-react-app": "^3.4.1",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-session": "^1.17.1",
+    "graphql": "^14.6.0",
+    "graphql-passport": "^0.6.3",
+    "mongoose": "^5.9.9",
+    "nodemon": "^2.0.3",
+    "passport": "^0.4.1",
+    "passport-google-oauth": "^2.0.0",
+    "uuid": "^7.0.3"
+  },
+  "devDependencies": {},
+  "engines": {
+    "node": "12.16.x"
+  }
+}
