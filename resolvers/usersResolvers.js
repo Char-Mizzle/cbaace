@@ -7,9 +7,5 @@ module.exports = {
     },
     Mutation: {
         logout: (parent, args, context) => context.logout(),
-        saveUserStatus: (parent, { status }, {currentUser}) => {
-            console.log('status saving: ', status)
-            currentUser.updateOne({status: status}).then();
-        }
     },
 }

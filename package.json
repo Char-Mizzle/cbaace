@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo testing",
     "start": "node index",
-    "build": "cd client/ && npm install && npm run build"
+    "build": "cd client/ && npm install && npm run build",
+    "dev": "nodemon --watch . index.js"
   },
   "repository": {
     "type": "git",
@@ -34,12 +35,16 @@
     "graphql": "^14.6.0",
     "graphql-passport": "^0.6.3",
     "mongoose": "^5.9.9",
-    "nodemon": "^2.0.3",
     "passport": "^0.4.1",
+    "passport-facebook": "^3.0.0",
+    "passport-github": "^1.1.0",
     "passport-google-oauth": "^2.0.0",
+    "passport-twitter": "^1.0.4",
     "uuid": "^7.0.3"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  },
   "engines": {
     "node": "12.16.x"
   }

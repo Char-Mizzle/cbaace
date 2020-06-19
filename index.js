@@ -4,17 +4,15 @@ const path = require('path');
 const session = require('express-session');
 const uuid = require('uuid').v4;
 const { ApolloServer } = require('apollo-server-express');
-const mongoose = require('mongoose');
+// const mongoose = require('mongoose');
 const passportSetup = require('./passport-setup');
 const passport = require('passport');
 const resolvers = require('./resolvers/rootResolver');
 const { typeDefs } = require('./schemas/schema');
 const authRoutes = require('./routes/auth-routes');
-const configData = require('./config/apollo.config');
+// const configData = require('./config/apollo.config');
 // const cors = require('cors');
 const User = require('./models/user-model');
-const Map = require('./models/map-model');
-const Tileset = require('./models/tileset-model');
 require("dotenv").config();
 /* --------------------------------- Imports -------------------------------- */
 
@@ -57,8 +55,6 @@ const server = new ApolloServer({
         logout: () => req.logout(),
         models: {
             User,
-            Map,
-            Tileset,
         }
     }),
     introspection: true,
@@ -68,30 +64,16 @@ const server = new ApolloServer({
 // server.applyMiddleware({ app, cors: false });
 server.applyMiddleware({ app, path: "/graphql" });
 
-
-/* --------------------------------- Express Setup -------------------------------- */
-var uri = `mongodb://${configData.mongo.MONGO_USER}:${configData.mongo.MONGO_PASSWORD}@cluster0-shard-00-00-uuwj5.mongodb.net:27017,cluster0-shard-00-01-uuwj5.mongodb.net:27017,cluster0-shard-00-02-uuwj5.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true&w=majority`;
-// mongoose.connect(uri, function(err, client) {
-//   const collection = client.db("test").collection("devices");
-//   // perform actions on the collection object
-//   client.close();
-// }).then(() => {
-//     app.listen({ port: PORT }, ()=> {
-//         console.log(`Server ready at http://localhost:${PORT}`);
-//     })
+/* --------------------------------- MongoDB Setup -------------------------------- */
+// var uri = `mongodb://${configData.mongo.MONGO_USER}:${configData.mongo.MONGO_PASSWORD}@cluster0-shard-00-00-uuwj5.mongodb.net:27017,cluster0-shard-00-01-uuwj5.mongodb.net:27017,cluster0-shard-00-02-uuwj5.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true&w=majority`;
+// mongoose.connect(process.env.MONGODB_URI || uri,
+//     // { useNewUrlParser: true , useUnifiedTopology: true }
+// ).then(() => {
+/* --------------------------------- Express Start -------------------------------- */
+app.listen({ port: PORT }, ()=> {
+    console.log(`Server ready at http://localhost:${PORT}`);
+})
 // }).catch(err => {
 //     console.log(err);
-// });
-// const uri = `mongodb+srv://${configData.mongo.MONGO_USER}:${configData.mongo.MONGO_PASSWORD}@cluster0-uuwj5.mongodb.net/test?retryWrites=true&w=majority`
-mongoose.connect(process.env.MONGODB_URI || uri,
-    // { useNewUrlParser: true , useUnifiedTopology: true }
-).then(() => {
-    app.listen({ port: PORT }, ()=> {
-        console.log(`Server ready at http://localhost:${PORT}`);
-    })
-}).catch(err => {
-    console.log(err);
-})
+// })
 
-
-/* --------------------------------- MongoDB Setup -------------------------------- */

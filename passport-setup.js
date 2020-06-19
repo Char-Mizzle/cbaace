@@ -1,9 +1,13 @@
 
 const passport = require('passport');
 const User = require('./models/user-model');
-const configData = require('./config/apollo.config');
-const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
-
+const { Strategy: TwitterStrategy } = require('passport-twitter')
+const { OAuth2Strategy: GoogleStrategy } = require('passport-google-oauth')
+const { Strategy: FacebookStrategy } = require('passport-facebook')
+const { Strategy: GithubStrategy} = require('passport-github')
+const { 
+  TWITTER_CONFIG, GOOGLE_CONFIG, FACEBOOK_CONFIG, GITHUB_CONFIG
+} = require('./config')
 passport.serializeUser((user, done) => {
     done(null, user.id);
 });
@@ -14,12 +18,6 @@ passport.deserializeUser((id, done) => {
     });
 });
 
-// initialize the Google Strategy with Google API client key saved
-const googleOptions = {
-    clientID: configData.web_google.client_id,
-    clientSecret: configData.web_google.client_secret,
-    callbackURL: "/auth/google/callback"
-}
 const googleCallback = (accessToken, refreshToken, profile, done) => {
     // Check for existing user
     User.findOne({googleid: profile.id}).then((currentUser) => {
@@ -47,9 +45,9 @@ const googleCallback = (accessToken, refreshToken, profile, done) => {
     })
 };
 
-passport.use(new GoogleStrategy(
-    googleOptions,
-    googleCallback,
-));
+// passport.use(new TwitterStrategy(TWITTER_CONFIG, callback))
+passport.use(new GoogleStrategy(GOOGLE_CONFIG, googleCallback))
+// passport.use(new FacebookStrategy(FACEBOOK_CONFIG, callback))
+// passport.use(new GithubStrategy(GITHUB_CONFIG, callback))
 
 module.exports = passport;
