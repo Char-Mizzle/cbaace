@@ -30,17 +30,17 @@ module.exports = {
                             // If user already reacted this? take it away
                             if (annotation.likes.includes(currentUser.id)) isReact = false;
                             break;
-                        case 'laughs':
-                            update = {laughs: currentUser.id};
-                            if (annotation.laughs.includes(currentUser.id)) isReact = false;
-                            break;
                         case 'loves':
                             update = {loves: currentUser.id};
                             if (annotation.loves.includes(currentUser.id)) isReact = false;
                             break;
+                        case 'smiles':
+                            update = {smiles: currentUser.id};
+                            if (annotation.smiles.includes(currentUser.id)) isReact = false;
+                            break;
                     }
                     // pull out userid from all reactions
-                    annotation.updateOne({$pull: {likes: currentUser.id, laughs: currentUser.id, loves: currentUser.id}
+                    annotation.updateOne({$pull: {likes: currentUser.id, loves: currentUser.id, smiles: currentUser.id}
                     }).then(()=>{
                         // add a new update if not unreact
                         if (isReact) {

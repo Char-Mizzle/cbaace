@@ -14,7 +14,7 @@ const userSchema = new Schema({
     },
     annotations: [
         {
-            type: mongoose.Schema.Types.ObjectId,
+            type: Schema.Types.ObjectId,
             ref: 'annotation',
         },
     ],

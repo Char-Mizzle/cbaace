@@ -1,21 +1,33 @@
 const { gql } = require('apollo-server');
 
 const typeDefs = gql`
+    enum AnnType {
+        CORRECT
+        DOUBT
+        ERROR
+    }
     type Annotation {
         _id: String!
         id: String!
-        author: User!
+        type: AnnType!
+        title: String!
         content: String!
+        reference: String
+        author: User!
+        created: String!
         likes: [String]
-        laughs: [String]
         loves: [String]
+        smiles: [String]
     }
     extend type Query {
         annotationsByUser(uid: String!): [Annotation]
     }
     input annotationInput {
         anid: String!
+        type: AnnType!
+        title: String!
         content: String!
+        reference: String
     }
     extend type Mutation {
         toogleVotes(id: String!, type: String!): Boolean!

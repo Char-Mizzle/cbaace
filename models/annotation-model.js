@@ -6,22 +6,43 @@ const annotationSchema = new Schema({
         type: String,
         required: true,
     },
+    type: {
+        type: String,
+        enum: ['CORRECT', 'DOUBT', 'ERROR'],
+        required: true,
+    },
+    title: {
+        type: String,
+        required: true,
+    },
     content: {
         type: String,
         required: true,
     },
-    likes: [{
-        type: mongoose.Schema.Types.ObjectId,
+    reference: {
+        type: String,
+    },
+    author: {
+        type: Schema.Types.ObjectId,
         ref: 'User',
         required: true,
-    }],
-    laughs: [{
-        type: mongoose.Schema.Types.ObjectId,
+    },
+    created: {
+        type: Schema.Types.Date,
+        required: true,
+    },
+    likes: [{
+        type: Schema.Types.ObjectId,
         ref: 'User',
         required: true,
     }],
     loves: [{
-        type: mongoose.Schema.Types.ObjectId,
+        type: Schema.Types.ObjectId,
+        ref: 'User',
+        required: true,
+    }],
+    smiles: [{
+        type: Schema.Types.ObjectId,
         ref: 'User',
         required: true,
     }],
