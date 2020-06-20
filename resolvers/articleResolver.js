@@ -1,10 +1,18 @@
+const annotation = require("../schemas/annotation");
+
 module.exports = {
     Query: {
+        articleByUrl: (parent, {url}, { models: { Article }}) => {
+            return Article.findOne({url: url});
+        }
     },
     Mutation: {
         // In the client, only allow owner of the annotation to edit
-        saveAnnotation: (parent, {aid, url, qid, quote, anid, content}, { models: { Annotation, Article }, currentUser}) => {
+        saveAnnotation: (parent, args, { models: { Annotation, Article }, currentUser}) => {
             // Add to Annotation
+            let {aid, url} = args.article;
+            let {qid, quote} = args.quote;
+            let {anid, content} = args.annotation;
             Annotation.findById(anid).then((oldAnnotation)=>{
                 // Annotation already exists
                 if (oldAnnotation){
@@ -19,7 +27,6 @@ module.exports = {
                         author: currentUser.id,
                         upvotes: [currentUser.id],
                         downvotes: [],
-                        articleRef: aid,
                     });
                     newAnnotation.save().then(
                         console.log("New Annotation saved")
@@ -30,8 +37,8 @@ module.exports = {
             // Add to Article => quotes
             Article.findById(aid).then((article)=>{
                 // create an article if it does not exist
-                if (!article){
-                    // if quote exists
+                if (article){
+                    // if article exists
                     let quoteFound = false;
                     article.quotes.forEach(quote => {
                         if (quote.id === qid){
@@ -77,4 +84,16 @@ module.exports = {
             }
         },
     },
+    Article: {
+        quotes: ({quotes}, args, { models: { Annotation }}) => {
+            return Promise.all(quotes.map((quote) => {
+                return Annotation.find({'id': { $in: quote.annotations}})
+                    .exec()
+                    .then((annotations)=>{
+                        quote.annotations = annotations;
+                        return quote;
+                    })
+            }))
+        },
+    }
 }

@@ -8,7 +8,7 @@
 
 ## How to run the server
 1. npm install
-1. npm dev (this will run index.js with nodemon which will auto recompile on changes)
+1. npm run dev (this will run index.js with nodemon which will auto recompile on changes)
 
 ## Config File
 This file will be discarded from git repo in our final deployment
@@ -16,6 +16,7 @@ This file will be discarded from git repo in our final deployment
 ## MongoDB Structure
 ### Depending on our decision between annotion on the article vs on quotes, the structure will change
 
+```
 user{
     id
     username
@@ -36,3 +37,4 @@ annotation{
     downvotes
     *maybe sentiment info*
 }
+```

@@ -11,9 +11,10 @@ router.get('/google',
 
 router.get('/google/callback',
     passport.authenticate('google', { 
-        successRedirect: '/google',
-        failureRedirect: '/google', }),
-    function(req, res) {console.log('\nfound\n');res.redirect('/google')}
+        // change at deployment
+        successRedirect: 'http://localhost:5000/graphql',
+        failureRedirect: 'http://localhost:5000/graphql', }),
+    function(req, res) {console.log('\nfound\n');res.redirect('http://localhost:5000/graphql')}
 )
 
 module.exports = router;

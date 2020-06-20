@@ -1,6 +1,9 @@
 module.exports = {
     Query: {
-        loggedInUser: (parent, args, context) => context.currentUser,
+        loggedInUser: (parent, args, context) => {
+            console.log(context.currentUser)
+            return context.currentUser
+        },
         user: (parent, args, { models: { User } }, info) => {
             return User.findById(args.id);
         },
