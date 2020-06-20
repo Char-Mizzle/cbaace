@@ -6,12 +6,13 @@ const userSchema = new Schema({
         type: String,
         required: true,
     },
-    firstName: String,
-    lastName: String,
     authid: {
         type: String,
         required: true,
     },
+    firstName: String,
+    lastName: String,
+    email: String,
     annotations: [
         {
             type: Schema.Types.ObjectId,

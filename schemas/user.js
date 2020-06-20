@@ -5,7 +5,8 @@ const typeDefs = gql`
         _id: String!
         id: String!
         authid: String!
-        username: String!
+        firstName: String!
+        lastName: String!
         email: String!
         annotations: [Annotation]
     }
