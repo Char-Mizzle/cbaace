@@ -25,8 +25,9 @@ module.exports = {
                         id: anid,
                         content: content,
                         author: currentUser.id,
-                        upvotes: [currentUser.id],
-                        downvotes: [],
+                        likes: [],
+                        laughs: [],
+                        loves: [],
                     });
                     newAnnotation.save().then(
                         console.log("New Annotation saved")
