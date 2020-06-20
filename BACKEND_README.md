@@ -27,7 +27,8 @@
     You can reference what are the queries and mutations we have available with the docs and schemas on the right side
 2. run queries
 Example queries
-`mutation{
+```
+mutation{
   saveAnnotation(article: {aid: "507f1f77bcf86cd799439011", url: "testurl"}, quote: {qid: "507f1f77bcf86cd799439012", quote: "testquote"}, annotation: {anid:"507f1f77bcf86cd799439014", content:"testcontent1"})
 }
 (ids will later be generated in the client using mongoose.ObjectID but for now manually written)
@@ -43,7 +44,8 @@ query{
       }
     }
   }
-}`
+}
+```
 
 
 # Things to add
