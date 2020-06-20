@@ -1,25 +1,25 @@
 # File Structures
 ## schema
-  Defines what we promise to return to the client through graphql
-  Inputs or arguments are what we expect to receive from the client
-  Required fields are marked with ! at the end of the type
+  * Defines what we promise to return to the client through graphql
+  * Inputs or arguments are what we expect to receive from the client
+  * Required fields are marked with ! at the end of the type
 
 ## models
-  Defines the actual MongoDB data
-  Required fields are defined by creating an object with required field specified (there are examples on the code)
+  * Defines the actual MongoDB data
+  * Required fields are defined by creating an object with required field specified (there are examples on the code)
 
 ## resolvers
-  Defines how the mongoDB data gets reformed to process graphQL Queries and Mutations
-  In resolvers function, it takes three arguments (parents, args, context)
-    -- parents is a context on parent schema
-        i.e. if User schema has a field called id, we can call id from parent.id
-        (parent fields are only useful for the subqueries on fields which are defined at the bottom)
-    -- args are arguments that is passed down
-    -- context is calling the MongoDB or Passport context which is defined on index.js (in const server = new ApolloServer(...))
-        -- currentUser gives access to the logged in user's context as in MongoDB
+  * Defines how the mongoDB data gets reformed to process graphQL Queries and Mutations
+  * In resolvers function, it takes three arguments (parents, args, context)
+    * parents is a context on parent schema
+       * i.e. if User schema has a field called id, we can call id from parent.id
+       * (parent fields are only useful for the subqueries on fields which are defined at the bottom)
+    * args are arguments that is passed down
+    * context is calling the MongoDB or Passport context which is defined on index.js (in const server = new ApolloServer(...))
+       * currentUser gives access to the logged in user's context as in MongoDB
 
-  The resolvers at the bottom with the Schema name (i.e. Article: {quotes: ()=>{} ... })
-    -- these are used to define or override how the subschema are unpacked
+  * The resolvers at the bottom with the Schema name (i.e. Article: {quotes: ()=>{} ... })
+    * these are used to define or override how the subschema are unpacked
 
 # How to debug the features
 1. run the server, login using localhost:5000/auth/google (saveAnnotation takes currentUser as a context and requires login)
@@ -58,5 +58,5 @@ query{
     * we need to discuss how we want to rank the annotations since we have 3 different choices
 * We need to discuss where we want to process sentiment data and whether we would like to 
 
-Modify the structure in annotation schema and annotetion model
-Update the saveAnnotation resolver in the articleResolver
+* Modify the structure in annotation schema and annotetion model
+* Update the saveAnnotation resolver in the articleResolver
