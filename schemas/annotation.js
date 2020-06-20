@@ -6,18 +6,19 @@ const typeDefs = gql`
         id: String!
         author: User!
         content: String!
-        upvotes: Int
-        downvotes: Int
+        likes: [String]
+        laughs: [String]
+        loves: [String]
     }
     extend type Query {
         annotationsByUser(uid: String!): [Annotation]
     }
-    input annotationInput{
+    input annotationInput {
         anid: String!
         content: String!
     }
     extend type Mutation {
-        toogleVotes(id: String!, isUpvote: Boolean!): Boolean!
+        toogleVotes(id: String!, type: String!): Boolean!
         deleteAnnotation(aid: String!, qid: String!): Boolean!
     }`;
 
