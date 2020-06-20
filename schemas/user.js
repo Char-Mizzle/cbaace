@@ -4,12 +4,10 @@ const typeDefs = gql`
     type User {
         _id: String!
         id: String!
-        googleid: ID!
-        firstName: String
-        lastName: String
-        email: String
-        profileImage: String
-        status: String
+        authid: String!
+        username: String!
+        email: String!
+        annotations: [Annotation]
     }
     extend type Query {
         loggedInUser : User

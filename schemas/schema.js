@@ -1,6 +1,8 @@
 const { gql } = require('apollo-server');
 
 const User = require('./user').typeDefs;
+const Annotation = require('./annotation').typeDefs;
+const Article = require('./article').typeDefs;
 
 const Query = gql`
     type Query {
@@ -13,5 +15,5 @@ const Query = gql`
 `
 
 module.exports = {
-    typeDefs : [Query, User]
+    typeDefs : [Query, User, Annotation, Article]
 } 

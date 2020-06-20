@@ -7,27 +7,16 @@ const userSchema = new Schema({
         required: true,
     },
     username: String,
-    googleid: {
+    authid: {
         type: String,
         required: true,
     },
-    firstName: String,
-    lastName: String,
-    email: String,
-    profileImage: String,
-    status: String,
-    maps: [
+    annotations: [
         {
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'map',
+            ref: 'annotation',
         },
     ],
-    tilesets: [
-        {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'tileset',
-        },
-    ]
 });
 
 const User = mongoose.model('user', userSchema);

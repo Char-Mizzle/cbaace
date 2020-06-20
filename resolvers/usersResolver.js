@@ -8,4 +8,9 @@ module.exports = {
     Mutation: {
         logout: (parent, args, context) => context.logout(),
     },
+    User: {
+        annotations:  ({annotations}, args, { models: { Annotation } }, info) => {
+            return annotations.map((annotationRef)=>Annotation.findById(annotationRef));
+        },
+    },
 }
