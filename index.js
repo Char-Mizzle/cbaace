@@ -4,13 +4,13 @@ const path = require('path');
 const session = require('express-session');
 const uuid = require('uuid').v4;
 const { ApolloServer } = require('apollo-server-express');
-// const mongoose = require('mongoose');
+const mongoose = require('mongoose');
 const passportSetup = require('./passport-setup');
 const passport = require('passport');
 const resolvers = require('./resolvers/rootResolver');
 const { typeDefs } = require('./schemas/schema');
 const authRoutes = require('./routes/auth-routes');
-// const configData = require('./config/apollo.config');
+const { MONGOOSE_CONFIG } = require('./config');
 // const cors = require('cors');
 const User = require('./models/user-model');
 require("dotenv").config();
@@ -65,15 +65,15 @@ const server = new ApolloServer({
 server.applyMiddleware({ app, path: "/graphql" });
 
 /* --------------------------------- MongoDB Setup -------------------------------- */
-// var uri = `mongodb://${configData.mongo.MONGO_USER}:${configData.mongo.MONGO_PASSWORD}@cluster0-shard-00-00-uuwj5.mongodb.net:27017,cluster0-shard-00-01-uuwj5.mongodb.net:27017,cluster0-shard-00-02-uuwj5.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true&w=majority`;
-// mongoose.connect(process.env.MONGODB_URI || uri,
-//     // { useNewUrlParser: true , useUnifiedTopology: true }
-// ).then(() => {
+var uri = `mongodb+srv://${MONGOOSE_CONFIG.user}:${MONGOOSE_CONFIG.pswd}@cbaace0-uqdnf.azure.mongodb.net/${MONGOOSE_CONFIG.dbname}?retryWrites=true&w=majority`;
+mongoose.connect(process.env.MONGODB_URI || uri,
+    { useNewUrlParser: true , useUnifiedTopology: true }
+).then(() => {
 /* --------------------------------- Express Start -------------------------------- */
 app.listen({ port: PORT }, ()=> {
     console.log(`Server ready at http://localhost:${PORT}`);
 })
-// }).catch(err => {
-//     console.log(err);
-// })
+}).catch(err => {
+    console.log(err);
+})
 
