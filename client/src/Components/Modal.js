@@ -2,8 +2,11 @@ import React from "react";
 import { X, AlignCenter } from "react-feather";
 import Draggable from "react-draggable";
 import { ModalContext } from "../Contexts/ModalProvider";
+import Article from "./Article";
 
 const Modal = () => {
+  const url = "testurl2.url"
+
   return (
     <ModalContext.Consumer>
       {({ windowPosition, extensionId, getExtensionId }) => (
@@ -35,6 +38,8 @@ const Modal = () => {
                   <button onClick={getExtensionId} className="modal-button">
                     Get Extension ID
                   </button>
+                  {/* ARTICLE INSERT */}
+                  <Article url={url}/>
                 </div>{" "}
                 {/* modal content end div */}
               </div>{" "}

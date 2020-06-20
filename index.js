@@ -11,7 +11,7 @@ const resolvers = require('./resolvers/rootResolver');
 const { typeDefs } = require('./schemas/schema');
 const authRoutes = require('./routes/auth-routes');
 const { MONGOOSE_CONFIG } = require('./config');
-// const cors = require('cors');
+const cors = require('cors');
 const User = require('./models/user-model');
 const Annotation = require('./models/annotation-model');
 const Article = require('./models/article-model');
@@ -24,6 +24,15 @@ const SESSON_SECRET = process.env.SECRET || 'This is a test secret';
 /* --------------------------------- Constants -------------------------------- */
 
 const app = express();
+
+// Allow request from the client
+var corsOptions = {
+    origin: 'http://localhost:3000',
+    credentials: true // <-- REQUIRED backend setting
+};
+
+app.use(cors(corsOptions));
+
 // expand the request limit
 app.use(express.json({ limit: '2mb' }));
 
@@ -44,6 +53,7 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 app.use('/auth', authRoutes);
+
 // app.get('*', (req,res) =>{
 //     res.sendFile(path.join(__dirname+'/client/build/index.html'));
 // });
@@ -51,7 +61,10 @@ app.use('/auth', authRoutes);
 const server = new ApolloServer({
     typeDefs: typeDefs,
     resolvers: resolvers,
-    
+    cors: {
+        origin: 'http://localhost:3000',
+        credentials: true
+    },
     context: ({req}) =>({
         currentUser: req.user,
         logout: () => req.logout(),
@@ -64,13 +77,15 @@ const server = new ApolloServer({
     introspection: true,
     playground: {
         settings: {
-            'request.credentials': 'same-origin',
+            'request.credentials': 'include',
         },
     },
 })
 
-// server.applyMiddleware({ app, cors: false });
+// Disable default Apollo cors setting
+server.applyMiddleware({ app, cors: false });
 server.applyMiddleware({ app, path: "/graphql" });
+
 
 /* --------------------------------- MongoDB Setup -------------------------------- */
 var uri = `mongodb+srv://${MONGOOSE_CONFIG.user}:${MONGOOSE_CONFIG.pswd}@cbaace0-uqdnf.azure.mongodb.net/${MONGOOSE_CONFIG.dbname}?retryWrites=true&w=majority`;

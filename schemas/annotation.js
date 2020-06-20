@@ -30,7 +30,7 @@ const typeDefs = gql`
         reference: String
     }
     extend type Mutation {
-        toogleReaction(id: String!, isUpvote: Boolean!): Boolean!
+        toogleReaction(id: String!, type: String!): Boolean!
         deleteAnnotation(aid: String!, qid: String!): Boolean!
     }`;
 

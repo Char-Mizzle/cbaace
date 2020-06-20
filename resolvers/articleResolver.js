@@ -3,6 +3,7 @@ const annotation = require("../schemas/annotation");
 module.exports = {
     Query: {
         articleByUrl: (parent, {url}, { models: { Article }}) => {
+            console.log("loading article")
             return Article.findOne({url: url});
         }
     },
