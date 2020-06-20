@@ -23,8 +23,8 @@
 
 # How to debug the features
 1. run the server, login using localhost:5000/auth/google (saveAnnotation takes currentUser as a context and requires login)
-    This will redirect to localhost:5000/graphql 
-    You can reference what are the queries and mutations we have available with the docs and schemas on the right side
+  * This will redirect to localhost:5000/graphql 
+  * You can reference what are the queries and mutations we have available with the docs and schemas on the right side
 2. run queries
 Example queries
 ```
