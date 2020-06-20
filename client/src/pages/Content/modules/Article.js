@@ -4,8 +4,6 @@ import { ARTICLE_BY_URL, CURRENT_USER_QUERY } from '../stores/queries';
 import Annotation from "./Annotation";
 
 const Quote = ({quote}) => {
-    
-
     return (
         <div>
             <p>Quote: {quote.quote}, id: {quote.id}</p>

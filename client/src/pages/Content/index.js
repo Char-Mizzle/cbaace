@@ -3,6 +3,17 @@ import SideNav, { Toggle, Nav, NavItem, NavIcon, NavText } from '@trendmicro/rea
 // Be sure to include styles at some point, probably during your bootstraping
 import '@trendmicro/react-sidenav/dist/react-sidenav.css';
 import ReactDOM from "react-dom";
+import ApolloClient from 'apollo-boost';
+import { ApolloProvider } from '@apollo/react-hooks'
+import { InMemoryCache } from 'apollo-cache-inmemory';
+
+const cache = new InMemoryCache({});
+const client = new ApolloClient({
+  // later change to deployed url
+    uri: 'http://localhost:5000/graphql',
+    credentials: 'include',
+    cache: cache,
+});
 
 export default class SidePanel extends Component {
   render() {
@@ -48,5 +59,5 @@ export default class SidePanel extends Component {
 
 const app = document.createElement('div');
 document.body.appendChild(app);
-ReactDOM.render(<SidePanel />, app);
+ReactDOM.render(<ApolloProvider client={client}><SidePanel /></ApolloProvider>, app);
 
