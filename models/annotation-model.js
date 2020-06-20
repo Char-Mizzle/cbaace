@@ -6,11 +6,6 @@ const annotationSchema = new Schema({
         type: String,
         required: true,
     },
-    author: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User',
-        required: true,
-    },
     content: {
         type: String,
         required: true,
@@ -25,11 +20,6 @@ const annotationSchema = new Schema({
         ref: 'User',
         required: true,
     }],
-    articleRef: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Article',
-        required: true,
-    }
 });
 
 const Annotation = mongoose.model('annotation', annotationSchema);

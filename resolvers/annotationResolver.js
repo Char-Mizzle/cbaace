@@ -1,11 +1,20 @@
 module.exports = {
     Query: {
-        annotationsByUser: (parent, {uid}, { models: { Annotation }}) => {
-            User.findById(args.id).then((user) => {
-                return user.annotations.map((annotationRef)=>Annotation.findById(annotationRef));
+        annotationsByUser: (parent, {uid}, { models: { Annotation, User }}) => {
+            User.findById(uid).then((user) => {
+                if (user){
+                    return Promise.all(user.annotations.map((annotationRef)=>{ 
+                        return Annotation.findById(annotationRef)
+                            .exec()
+                            .then((annotation)=>{
+                                console.log(annotation)
+                                return annotation
+                            })
+                    }));
+                } else {
+                    return []
+                }
             })
-            // not found
-            return [];
         }
     },
     Mutation: {
@@ -21,24 +30,24 @@ module.exports = {
             return true;
         },
         // Lets do owner verification in the client side?
-        deleteAnnotation: (parent, {aid, qid}, { models: { User, Annotation, Article }}) => {
+        deleteAnnotation: (parent, {anid}, { models: { User, Annotation, Article }}) => {
             // delete from the user's annotations list, and quote in article list, and the annotation itself
             // find the annotation
-            Annotation.findById(aid).then((annotation) => {
+            Annotation.findById(anid).then((annotation) => {
                 if (annotation) {
                     // find the user w author id in the article
-                    User.findOneAndUpdate({id: annotation.author}, {$pull: {annotations: aid}}).then(()=>{
+                    User.findOneAndUpdate({id: annotation.author}, {$pull: {annotations: anid}}).then(()=>{
                         // find the quote from articles w quote id
-                        Article.findById(annotation.articleRef).then((article) => {
+                        Article.find({'quotes.annotations':anid}).then((article) => {
                             article.quotes.forEach((quote) =>{
-                                if (quote.id === qid){
+                                if (quote.annotations.includes(anid)){
                                     // filter out current annotation id
-                                    quote.annotations.filter(el => el !== aid);
+                                    quote.annotations.filter(el => el !== anid);
                                 }
                             })
                             article.save().then(
                                 // delete from the document
-                                Annotation.deleteOne({id: aid}).then(
+                                Annotation.deleteOne({id: anid}).then(
                                     console.log("annotation successfully deleted")
                                 )
                             );
@@ -57,13 +66,8 @@ module.exports = {
         downvotes: ({downvotes}, args, context) => {
             return downvotes.length;
         },
-        article: ({articleRef}, args, {Article}) => {
-            return Article.findById(articleRef)
-        },
-        quote: ({id, articleRef}, args, {models: {Article}}) => {
-            Article.findById(articleRef).then((article) => {
-                return article.quotes.find(quote => quote.annotations.includes(id));
-            })
-        },
+        author: ({id}, args, { models: {User} }) => {
+            return User.find({"annotations": id}).exec().then((user)=>{console.log(user); return user});
+        }
     }
 }

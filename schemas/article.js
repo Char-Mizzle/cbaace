@@ -21,6 +21,9 @@ const typeDefs = gql`
         aid: String!
         url: String!
     }
+    extend type Query {
+        articleByUrl(url: String!): Article
+    }
     extend type Mutation {
         saveAnnotation(article: articleInput!, quote: quoteInput!, annotation: annotationInput!): Boolean
     }`;

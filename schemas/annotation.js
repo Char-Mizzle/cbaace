@@ -6,8 +6,6 @@ const typeDefs = gql`
         id: String!
         author: User!
         content: String!
-        article: Article!
-        quote: Quote!
         upvotes: Int
         downvotes: Int
     }

@@ -13,6 +13,8 @@ const authRoutes = require('./routes/auth-routes');
 const { MONGOOSE_CONFIG } = require('./config');
 // const cors = require('cors');
 const User = require('./models/user-model');
+const Annotation = require('./models/annotation-model');
+const Article = require('./models/article-model');
 require("dotenv").config();
 /* --------------------------------- Imports -------------------------------- */
 
@@ -26,10 +28,10 @@ const app = express();
 app.use(express.json({ limit: '2mb' }));
 
 // Serve the static files from the React app
-app.use(express.static(path.join(__dirname, 'client/build')));
-if (process.env.NODE_ENV === 'production') {
-    app.use(express.static('client/build'));
-}
+// app.use(express.static(path.join(__dirname, 'client/build')));
+// if (process.env.NODE_ENV === 'production') {
+//     app.use(express.static('client/build'));
+// }
 
 // session for a user
 app.use(session({
@@ -42,9 +44,9 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 app.use('/auth', authRoutes);
-app.get('*', (req,res) =>{
-    res.sendFile(path.join(__dirname+'/client/build/index.html'));
-});
+// app.get('*', (req,res) =>{
+//     res.sendFile(path.join(__dirname+'/client/build/index.html'));
+// });
 
 const server = new ApolloServer({
     typeDefs: typeDefs,
@@ -55,10 +57,16 @@ const server = new ApolloServer({
         logout: () => req.logout(),
         models: {
             User,
+            Annotation,
+            Article,
         }
     }),
     introspection: true,
-    playground: true,
+    playground: {
+        settings: {
+            'request.credentials': 'same-origin',
+        },
+    },
 })
 
 // server.applyMiddleware({ app, cors: false });

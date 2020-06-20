@@ -20,21 +20,20 @@ passport.deserializeUser((id, done) => {
 
 const googleCallback = (accessToken, refreshToken, profile, done) => {
     // Check for existing user
-    User.findOne({googleid: profile.id}).then((currentUser) => {
+    User.findOne({authid: profile.id}).then((currentUser) => {
         if (currentUser){
             console.log('current user: ' + currentUser);
-            currentUser.updateOne({$set:{profileImage: profile.photos[0].value}}).then((updated)=>{
-                console.log(updated);
-            });
+            // currentUser.updateOne({$set:{profileImage: profile.photos[0].value}}).then((updated)=>{
+            //     console.log(updated);
+            // });
             done(null, currentUser);
             return;
         } else {
             const newUser = new User({
-                googleid: profile.id,
+                authid: profile.id,
                 firstName: profile.name.givenName,
                 lastName: profile.name.familyName,
                 email: profile.emails[0].value,
-                profileImage: profile.photos[0].value,
             });
             newUser.id = newUser._id;
             newUser.save().then((newUser) => {
