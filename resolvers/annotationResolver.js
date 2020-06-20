@@ -18,13 +18,35 @@ module.exports = {
         }
     },
     Mutation: {
-        toogleVotes: (parent, {id, isUpvote}, { models: { Annotation }, currentUser}) => {
+        toogleReaction: (parent, {id, isUpvote}, { models: { Annotation }, currentUser}) => {
             Annotation.findById(id).then((annotation)=>{
                 // Get user id off the upvote or downvote list
                 if (annotation) {
-                    if (isUpvote) annotation.updateOne({$pull: {upvotes: currentUser.id}}).then();
-                    // else
-                    annotation.updateOne({$pull: {downvote: currentUser.id}}).then();
+                    let update;
+                    let isReact = true;
+                    switch(type){
+                        case 'likes': 
+                            update = {likes: currentUser.id};
+                            // If user already reacted this? take it away
+                            if (annotation.likes.includes(currentUser.id)) isReact = false;
+                            break;
+                        case 'laughs':
+                            update = {laughs: currentUser.id};
+                            if (annotation.laughs.includes(currentUser.id)) isReact = false;
+                            break;
+                        case 'loves':
+                            update = {loves: currentUser.id};
+                            if (annotation.loves.includes(currentUser.id)) isReact = false;
+                            break;
+                    }
+                    // pull out userid from all reactions
+                    annotation.updateOne({$pull: {likes: currentUser.id, laughs: currentUser.id, loves: currentUser.id}
+                    }).then(()=>{
+                        // add a new update if not unreact
+                        if (isReact) {
+                            annotation.updateOne({$push: update}).then();
+                        }
+                    });
                 }
             });
             return true;
@@ -60,12 +82,12 @@ module.exports = {
         }
     },
     Annotation: {
-        upvotes: ({upvotes}, args, context) => {
-            return upvotes.length;
-        },
-        downvotes: ({downvotes}, args, context) => {
-            return downvotes.length;
-        },
+        // upvotes: ({upvotes}, args, context) => {
+        //     return upvotes.length;
+        // },
+        // downvotes: ({downvotes}, args, context) => {
+        //     return downvotes.length;
+        // },
         author: ({id}, args, { models: {User} }) => {
             return User.find({"annotations": id}).exec().then((user)=>{console.log(user); return user});
         }
