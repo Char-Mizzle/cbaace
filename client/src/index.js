@@ -14,7 +14,7 @@ const client = new ApolloClient({
 });
 
 ReactDOM.render(
-  <ApolloProvider>
+  <ApolloProvider client={client}>
     <App />
   </ApolloProvider>, document.getElementById('modal-window'));
 
