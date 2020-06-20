@@ -6,15 +6,16 @@ const userSchema = new Schema({
         type: String,
         required: true,
     },
-    firstName: String,
-    lastName: String,
     authid: {
         type: String,
         required: true,
     },
+    firstName: String,
+    lastName: String,
+    email: String,
     annotations: [
         {
-            type: mongoose.Schema.Types.ObjectId,
+            type: Schema.Types.ObjectId,
             ref: 'annotation',
         },
     ],

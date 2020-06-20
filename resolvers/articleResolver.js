@@ -12,7 +12,7 @@ module.exports = {
             // Add to Annotation
             let {aid, url} = args.article;
             let {qid, quote} = args.quote;
-            let {anid, content} = args.annotation;
+            let {anid, type, title, content, reference} = args.annotation;
             Annotation.findById(anid).then((oldAnnotation)=>{
                 // Annotation already exists
                 if (oldAnnotation){
@@ -23,11 +23,15 @@ module.exports = {
                     const newAnnotation = new Annotation({
                         _id: anid,
                         id: anid,
+                        type: type,
+                        title: title,
                         content: content,
+                        reference: reference,
                         author: currentUser.id,
+                        created: new Date().getTime(),
                         likes: [],
-                        laughs: [],
                         loves: [],
+                        smiles: [],
                     });
                     newAnnotation.save().then(
                         console.log("New Annotation saved")
@@ -50,13 +54,13 @@ module.exports = {
                     });
                     if (!quoteFound) {
                         // if quote does not exist, add a new one
-                        articles.quotes.push({
+                        article.quotes.push({
                             id: qid,
                             quote: quote,
                             annotations: [anid],
                         })
                     }
-                }else{
+                } else {
                     // add a new article
                     article = new Article({
                         _id: aid,
