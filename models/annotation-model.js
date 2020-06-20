@@ -10,13 +10,18 @@ const annotationSchema = new Schema({
         type: String,
         required: true,
     },
-    upvotes: [{
-        type: mongoose.Schema.Types.ObjectId,
+    UsersLiked: [{
+        type: Schema.Types.ObjectId,
         ref: 'User',
         required: true,
     }],
-    downvotes: [{
-        type: mongoose.Schema.Types.ObjectId,
+    UsersHearted: [{
+        type: Schema.Types.ObjectId,
+        ref: 'User',
+        required: true,
+    }],
+    UsersSmiled: [{
+        type: Schema.Types.ObjectId,
         ref: 'User',
         required: true,
     }],

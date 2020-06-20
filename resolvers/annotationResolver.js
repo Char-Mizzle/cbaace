@@ -18,7 +18,7 @@ module.exports = {
         }
     },
     Mutation: {
-        toogleVotes: (parent, {id, isUpvote}, { models: { Annotation }, currentUser}) => {
+        toogleReaction: (parent, {id, isUpvote}, { models: { Annotation }, currentUser}) => {
             Annotation.findById(id).then((annotation)=>{
                 // Get user id off the upvote or downvote list
                 if (annotation) {

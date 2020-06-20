@@ -1,13 +1,27 @@
 const { gql } = require('apollo-server');
 
 const typeDefs = gql`
+    scalar Date
+    enum AnnType {
+        CORRECT
+        WARNING
+        FALSE
+    }
+
     type Annotation {
         _id: String!
         id: String!
+
         author: User!
+        type: AnnType
+        quote: String!
+        title: String!
         content: String!
-        upvotes: Int
-        downvotes: Int
+        reference: String
+        created: Date
+        UsersLiked: [String]
+        UsersHearted: [String]
+        UsersSmiled: [String]
     }
     extend type Query {
         annotationsByUser(uid: String!): [Annotation]
@@ -17,7 +31,7 @@ const typeDefs = gql`
         content: String!
     }
     extend type Mutation {
-        toogleVotes(id: String!, isUpvote: Boolean!): Boolean!
+        toogleReaction(id: String!, isUpvote: Boolean!): Boolean!
         deleteAnnotation(aid: String!, qid: String!): Boolean!
     }`;
 
