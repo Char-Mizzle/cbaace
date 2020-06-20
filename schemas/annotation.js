@@ -26,7 +26,7 @@ const typeDefs = gql`
     extend type Query {
         annotationsByUser(uid: String!): [Annotation]
     }
-    input annotationInput{
+    input annotationInput {
         anid: String!
         content: String!
     }
