@@ -1,18 +1,4 @@
 import React from 'react';
-<<<<<<< HEAD:client/src/App.js
-import './App.css';
-import Modal from './Components/Modal';
-import ModalProvider from './Contexts/ModalProvider';
-
-/**
- * @return {null}
- */
-function App() {
-  return (
-    <ModalProvider>
-      <Modal />
-    </ModalProvider>
-=======
 import logo from '../../assets/img/logo.svg';
 import './Newtab.css';
 
@@ -34,7 +20,6 @@ const Newtab = () => {
         </a>
       </header>
     </div>
->>>>>>> 1c1af23cf4f17ddc441fff6ba1a50d5709651de1:client/src/pages/Newtab/Newtab.jsx
   );
 };
 
