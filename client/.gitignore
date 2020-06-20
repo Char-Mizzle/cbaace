@@ -1,13 +1,7 @@
-# Logs
-logs
-*.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-lerna-debug.log*
+# See https://help.github.com/ignore-files/ for more about ignoring files.
 
-# Diagnostic reports (https://nodejs.org/api/report.html)
-report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
+# dependencies
+/node_modules
 
 # Runtime data
 pids
@@ -19,7 +13,6 @@ pids
 lib-cov
 # production
 /build
-/dist
 
 # Coverage directory used by tools like istanbul
 coverage
@@ -103,8 +96,13 @@ dist
 # DynamoDB Local files
 .dynamodb/
 
+<<<<<<< HEAD
 # TernJS port file
 .tern-port
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+=======
+# secrets
+secrets.*.js
+>>>>>>> 1c1af23cf4f17ddc441fff6ba1a50d5709651de1
