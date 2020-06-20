@@ -8,7 +8,7 @@
 
 ## How to run the server
 1. npm install
-1. npm dev (this will run index.js with nodemon which will auto recompile on changes)
+1. npm run dev (this will run index.js with nodemon which will auto recompile on changes)
 
 ## Config File
 This file will be discarded from git repo in our final deployment
