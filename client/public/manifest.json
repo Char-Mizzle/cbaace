@@ -1,14 +1,12 @@
 {
-  "short_name": "CBAACE",
-  "name": "Community Based Article Annotation Chrome Extension",
-  "version": "1.0.0",
+  "name": "CBAACE",
+  // added based on https://veerasundar.com/blog/2018/05/how-to-create-a-chrome-extension-in-react-js/
+  "version": "1.0",
   "manifest_version": 2,
-  "description": "Community Based Article Annotation Chrome Extension",
-  "icons": {
-    "512": "logo512.png"
-  },
   "browser_action": {
-      "default_icon": "logo512.png",
-      "default_popup": "popup.html"
-  }
+    "default_popup": "index.html"
+  },
+  // added based on https://medium.com/@gilfink/building-a-chrome-extension-using-react-c5bfe45aaf36
+  "content_security_policy": "script-src 'self' 'sha256-eE1k/Cs1U0Li9/ihPPQ7jKIGDvR8fYw65VJw+txfifw='; object-src 'self'",
+  "permissions": []
 }
