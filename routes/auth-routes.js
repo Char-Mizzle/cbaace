@@ -12,9 +12,9 @@ router.get('/google',
 router.get('/google/callback',
     passport.authenticate('google', { 
         // change at deployment
-        successRedirect: 'http://localhost:5000/graphql',
-        failureRedirect: 'http://localhost:5000/graphql', }),
-    function(req, res) {console.log('\nfound\n');res.redirect('http://localhost:5000/graphql')}
+        successRedirect: 'http://13.76.1.212:5000/graphql',
+        failureRedirect: 'http://13.76.1.212:5000/graphql', }),
+    function(req, res) {console.log('\nfound\n');res.redirect('http://13.76.1.212:5000/graphql')}
 )
 
 module.exports = router;
