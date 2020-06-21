@@ -7,7 +7,6 @@ import SideNav, {
   NavText,
 } from '@trendmicro/react-sidenav';
 // Be sure to include styles at some point, probably during your bootstraping
-import '@trendmicro/react-sidenav/dist/react-sidenav.css';
 import ReactDOM from 'react-dom';
 import './content.styles.css';
 
