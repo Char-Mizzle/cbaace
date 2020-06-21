@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo testing",
     "start": "node index",
-    "build": "node index",
+    "build": "npm install && node index",
     "dev": "nodemon --watch . index.js"
   },
   "repository": {
