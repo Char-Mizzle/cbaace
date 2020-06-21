@@ -9,5 +9,8 @@ module.exports = {
         user: "char-mizzle",
         pswd: "oweQuMu8O5GVmUvP",
         dbname: "CBAACE0"
+    },
+    CHROME_EXTENSION : {
+        extensionId: "efffeochiefkpadaeddgllnmfdjnmnoe"
     }
 }

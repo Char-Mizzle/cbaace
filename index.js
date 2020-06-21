@@ -10,7 +10,7 @@ const passport = require('passport');
 const resolvers = require('./resolvers/rootResolver');
 const { typeDefs } = require('./schemas/schema');
 const authRoutes = require('./routes/auth-routes');
-const { MONGOOSE_CONFIG } = require('./config');
+const { MONGOOSE_CONFIG, CHROME_EXTENSION } = require('./config');
 const cors = require('cors');
 const User = require('./models/user-model');
 const Annotation = require('./models/annotation-model');
@@ -27,7 +27,7 @@ const app = express();
 
 // Allow request from the client
 var corsOptions = {
-    origin: 'http://localhost:3000',
+    origin: `*`,
     credentials: true // <-- REQUIRED backend setting
 };
 
@@ -61,10 +61,6 @@ app.use('/auth', authRoutes);
 const server = new ApolloServer({
     typeDefs: typeDefs,
     resolvers: resolvers,
-    cors: {
-        origin: 'http://localhost:3000',
-        credentials: true
-    },
     context: ({req}) =>({
         currentUser: req.user,
         logout: () => req.logout(),
