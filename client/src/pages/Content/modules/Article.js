@@ -1,6 +1,6 @@
-import React, { Fragment } from "react";
-import { useQuery, useApolloClient } from '@apollo/react-hooks';
-import { ARTICLE_BY_URL, CURRENT_USER_QUERY } from '../stores/queries';
+import React from "react";
+import { useQuery } from '@apollo/react-hooks';
+import { ARTICLE_BY_URL, CURRENT_USER_QUERY } from '../../../stores/queries';
 import Annotation from "./Annotation";
 
 const Quote = ({quote}) => {
@@ -26,9 +26,12 @@ const Article = ({url}) => {
     });
     // If we can have a cute loading sequence itd be cute
     if (loading) return 'Loading';
-    if (error) return `Error! ${error.message}`;
+    if (error) {
+        // console.log(error)
+        return `Error! ${error}`;
+    }
     const article = data.articleByUrl
-    console.log(article)
+    // console.log(article)
 
     // Logged in user query example
     // const { loading, error, data }= useQuery(CURRENT_USER_QUERY);
@@ -47,7 +50,7 @@ const Article = ({url}) => {
                 })
             }
         </div>
-        : <p>No Annotations Created Yet!</p>
+        :<p>No Annotations Created Yet!</p>
     )
 }
 

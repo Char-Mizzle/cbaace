@@ -6,6 +6,7 @@ import ReactDOM from "react-dom";
 import ApolloClient from 'apollo-boost';
 import { ApolloProvider } from '@apollo/react-hooks'
 import { InMemoryCache } from 'apollo-cache-inmemory';
+import Article from './modules/Article';
 
 const cache = new InMemoryCache({});
 const client = new ApolloClient({
@@ -19,10 +20,12 @@ export default class SidePanel extends Component {
   render() {
     return (
         <SideNav
-        onSelect={(selected) => {
-            // Add your code here
-        }}
-    >
+            onSelect={(selected) => {
+                // Add your code here
+            }}
+        >
+        
+        <Article url="testurl2.url"/>
         <SideNav.Toggle />
         <SideNav.Nav defaultSelected="home">
             <NavItem eventKey="home">

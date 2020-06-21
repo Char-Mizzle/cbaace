@@ -7,6 +7,7 @@ chrome.runtime.onMessage.addListener(function(request, sender, callback) {
 function main() {
   // eslint-disable-next-line no-undef
   const extensionOrigin = 'chrome-extension://' + chrome.runtime.id;
+  console.log(extensionOrigin)
   // eslint-disable-next-line no-restricted-globals
   if (!location.ancestorOrigins.contains(extensionOrigin)) {
     // Fetch the local React index.html page
