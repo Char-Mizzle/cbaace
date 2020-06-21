@@ -1,6 +1,6 @@
 import React from "react";
 import { useQuery } from '@apollo/react-hooks';
-import { ARTICLE_BY_URL, CURRENT_USER_QUERY } from '../../../stores/queries';
+import { ARTICLE_BY_URL, CURRENT_USER_QUERY } from '../stores/queries';
 import Annotation from "./Annotation";
 
 const Quote = ({quote}) => {
