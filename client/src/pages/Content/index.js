@@ -3,6 +3,7 @@ import SideNav, { Toggle, Nav, NavItem, NavIcon, NavText } from '@trendmicro/rea
 // Be sure to include styles at some point, probably during your bootstraping
 import '@trendmicro/react-sidenav/dist/react-sidenav.css';
 import ReactDOM from "react-dom";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 export default class SidePanel extends Component {
   render() {
