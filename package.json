@@ -1,17 +1,17 @@
 {
   "name": "server",
   "version": "1.0.0",
-  "description": "Server Side for LayerCake",
+  "description": "Server Side for CBAACE",
   "main": "index.js",
   "scripts": {
     "test": "echo testing",
     "start": "node index",
-    "build": "cd client/ && npm install && npm run build",
+    "build": "npm run build",
     "dev": "nodemon --watch . index.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/charliemonnone/CSE416-LayerCake.git"
+    "url": "git+https://github.com/Char-Mizzle/cbaace.git"
   },
   "keywords": [
     "graphql",
