@@ -11,7 +11,7 @@ import Article from './modules/Article';
 const cache = new InMemoryCache({});
 const client = new ApolloClient({
   // later change to deployed url
-    uri: 'http://localhost:5000/graphql',
+    uri: 'https://cbaace.azurewebsites.net/graphql',
     credentials: 'include',
     cache: cache,
 });
