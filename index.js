@@ -52,6 +52,9 @@ app.use(session({
 
 app.use(passport.initialize());
 app.use(passport.session());
+app.get('/', (req, res)=>{
+    res.redirect(req.previousPage)
+})
 app.use('/auth', authRoutes);
 
 // app.get('*', (req,res) =>{

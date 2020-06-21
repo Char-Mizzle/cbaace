@@ -96,13 +96,10 @@ dist
 # DynamoDB Local files
 .dynamodb/
 
-<<<<<<< HEAD
 # TernJS port file
 .tern-port
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-=======
 # secrets
 secrets.*.js
->>>>>>> 1c1af23cf4f17ddc441fff6ba1a50d5709651de1

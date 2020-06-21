@@ -6,15 +6,21 @@ router.get('/logout', (req,res)=>{
     res.redirect('/')
 });
 
-router.get('/google',
-    passport.authenticate('google', { scope: ['profile', 'email']}));
+router.get('/google', 
+    passport.authenticate('google', { scope: ['profile', 'email']}),
+    function(req, res) {
+        console.log(req)
+        req.previousPage = req.originalUrl
+    });
 
 router.get('/google/callback',
     passport.authenticate('google', { 
         // change at deployment
-        successRedirect: '/graphql',
-        failureRedirect: '/graphql', }),
-    function(req, res) {console.log('\nfound\n');res.redirect('/graphql')}
+        successRedirect: '/',
+        failureRedirect: '/google', }),
+    function(req, res) {
+        console.log('\nfound\n');res.redirect(req.header('Referer'))
+    }
 )
 
 module.exports = router;
