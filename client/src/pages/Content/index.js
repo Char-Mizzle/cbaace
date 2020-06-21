@@ -9,7 +9,7 @@ import SideNav, {
 // Be sure to include styles at some point, probably during your bootstraping
 import '@trendmicro/react-sidenav/dist/react-sidenav.css';
 import ReactDOM from 'react-dom';
-import '/content.style.css';
+import './content.styles.css';
 
 export default class SidePanel extends Component {
   render() {
