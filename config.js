@@ -3,7 +3,7 @@ module.exports = {
         clientID: "1066431764451-029c8lf9ijj52shejec7k9f2eg8q8fnk.apps.googleusercontent.com",
         clientSecret: "4zHIGEMYZEg5x8X5_rO5HRZv",
         // change at deployment
-        callbackURL: "http://13.76.1.212:5000/auth/google/callback"
+        callbackURL: "/auth/google/callback"
     },
     MONGOOSE_CONFIG : {
         user: "char-mizzle",
